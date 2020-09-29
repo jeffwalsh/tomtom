@@ -24,7 +24,7 @@ var (
 )
 
 type Client struct {
-	httpclient *http.Client
+	HTTPClient *http.Client
 	key        string
 	baseURL    string
 	version    string
@@ -46,7 +46,7 @@ func NewClient(cfg *Config, options ...func(c *Client)) (*Client, error) {
 	}
 
 	c := &Client{
-		httpclient: &http.Client{},
+		HTTPClient: &http.Client{},
 		key:        cfg.APIKey,
 		baseURL:    baseURL,
 		version:    versionTwo,
@@ -99,7 +99,7 @@ func (c *Client) call(cmd string, query string, data url.Values, responseStruct 
 	req.URL.RawQuery = data.Encode()
 
 	// do the actual request
-	resp, err := c.httpclient.Do(req)
+	resp, err := c.HTTPClient.Do(req)
 	if err != nil {
 		return err
 	}
